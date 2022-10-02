@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require("dotenv").config()
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var coolRouter = require('./routes/cool');
@@ -11,10 +13,11 @@ var coolRouter = require('./routes/cool');
 var app = express();
 
 const mongoose = require("mongoose");
-const mongoDB = "mongodb+srv://AgusSuperAdmin:Elements23@cluster0.437ycvu.mongodb.net/?retryWrites=true&w=majority"
-mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+// const mongoDB = "mongodb+srv://AgusSuperAdmin:Elements23@cluster0.437ycvu.mongodb.net/?retryWrites=true&w=majority"
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+db.once("open", () => console.log("Connected to mongoose"))
 
 
 // view engine setup
