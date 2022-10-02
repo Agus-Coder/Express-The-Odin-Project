@@ -4,6 +4,9 @@ const Schema = mongoose.Schema;
 
 const BookInstanceSchema = new Schema({
   book: { type: Schema.Types.ObjectId, ref: "Book", required: true },
+  /* Object ID represents specific instances of a model in the database. 
+  For example, a book might use this to represent its author object. 
+  This will actually contain the unique ID (_id) for the specified object.*/
   imprint: { type: String, required: true },
   status: {
     type: String,
