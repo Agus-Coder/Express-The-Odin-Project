@@ -13,7 +13,7 @@ var coolRouter = require('./routes/cool');
 var app = express();
 
 const mongoose = require("mongoose");
-// const mongoDB = "mongodb+srv://AgusSuperAdmin:Elements23@cluster0.437ycvu.mongodb.net/?retryWrites=true&w=majority"
+
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
