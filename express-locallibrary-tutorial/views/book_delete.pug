@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1 #{title}: #{book.title}
+  p= book.isbn
+
+  if book_authors.length
+
+    p #[strong Delete the following authors before attempting to delete this book.]
+
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 Authors
+
+      dl
+      each author in book_authors
+        dt
+          a(href=author.url) #{author.first_name} #{author.family_name}
+        dd #{author.summary}
+
+  else
+    p Do you really want to delete this book?
+
+    form(method='POST' action='')
+      div.form-group
+        input#bookid.form-control(type='hidden',name='bookid', required='true', value=author._id )
+
+      button.btn.btn-primary(type='submit') Delete
