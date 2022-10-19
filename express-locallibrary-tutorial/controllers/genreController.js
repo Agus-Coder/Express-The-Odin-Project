@@ -142,7 +142,7 @@ exports.genre_delete_post = (req, res) => {
         Genre.findById(req.body.genreid).exec(callback);
       },
       genres_books(callback) {
-        Book.find({ author: req.body.genreid }).exec(callback);
+        Book.find({ genre: req.body.genreid }).exec(callback);
       },
     },
     (err, results) => {

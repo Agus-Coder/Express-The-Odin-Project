@@ -210,9 +210,6 @@ exports.book_delete_get = (req, res) => {
       books_authors(callback) {
         Author.find({ book: req.params.id }).exec(callback);
       },
-      books_genres(callback) {
-        Genre.find({ book: req.params.id }).exec(callback);
-      },
     },
     (err, results) => {
       if (err) {
@@ -240,11 +237,8 @@ exports.book_delete_post = (req, res) => {
       book(callback) {
         Book.findById(req.params.id).exec(callback);
       },
-      books_authors(callback) {
-        Author.find({ book: req.params.id }).exec(callback);
-      },
-      books_genres(callback) {
-        Genre.find({ book: req.params.id }).exec(callback);
+      books_bookinstances(callback) {
+        BookInstance.find({ bookinstance: req.params.id }).exec(callback);
       },
     },
     (err, results) => {
@@ -252,16 +246,16 @@ exports.book_delete_post = (req, res) => {
         return next(err);
       }
       // Success
-      if (results.books_authors.length > 0) {
-        // Author has books. Render in same way as for GET route.
+      if (results.books_bookinstances.length > 0) {
+        // Book has instances. Render in same way as for GET route.
         res.render("book_delete", {
           title: "Delete Book",
           book: results.book,
-          book_authors: results.books_authors,
+          book_bookinstances: results.books_bookinstances,
         });
         return;
       }
-      // Author has no books. Delete object and redirect to the list of authors.
+      // Nook has no instances. Delete object and redirect to the list of books.
       Book.findByIdAndRemove(req.body.bookid, (err) => {
         if (err) {
           return next(err);
