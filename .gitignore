@@ -1,5 +1,9 @@
 /node_modules
 
+.env
+
 /express-locallibrary-tutorial/node_modules
 
 /express-locallibrary-tutorial/.env
+
+/lesson-01
